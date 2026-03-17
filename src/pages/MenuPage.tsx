@@ -18,6 +18,15 @@ const MENU_ITEMS: Record<string, { label: string; desc: string; icon: React.Reac
   student: [
     { label: "Thesis", path: "/dashboard/thesis", desc: "View thesis progress", icon: <BookOpen className="h-6 w-6" />, color: "bg-primary/8 text-primary" },
   ],
+  thesis_supervisor: [
+    { label: "Thesis Review", path: "/dashboard/thesis-review", desc: "Review submissions & grading", icon: <BookOpen className="h-6 w-6" />, color: "bg-primary/8 text-primary" },
+    { label: "Notifications", path: "/dashboard/notifications", desc: "Announcements and alerts", icon: <Bell className="h-6 w-6" />, color: "bg-warning/10 text-warning" },
+  ],
+  hod: [
+    { label: "Students", path: "/dashboard/students", desc: "Department student records", icon: <GraduationCap className="h-6 w-6" />, color: "bg-secondary/20 text-secondary-foreground" },
+    { label: "Thesis", path: "/dashboard/thesis", desc: "Track submissions & progress", icon: <BookOpen className="h-6 w-6" />, color: "bg-primary/8 text-primary" },
+    { label: "Notifications", path: "/dashboard/notifications", desc: "Department announcements", icon: <Bell className="h-6 w-6" />, color: "bg-warning/10 text-warning" },
+  ],
   faculty: [
     { label: "Thesis", path: "/dashboard/thesis", desc: "Thesis supervision", icon: <BookOpen className="h-6 w-6" />, color: "bg-primary/8 text-primary" },
     { label: "Students", path: "/dashboard/students", desc: "Student information", icon: <GraduationCap className="h-6 w-6" />, color: "bg-secondary/20 text-secondary-foreground" },

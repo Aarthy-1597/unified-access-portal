@@ -40,12 +40,15 @@ const NAV_ITEMS: Record<UserRole, NavItem[]> = {
   thesis_supervisor: [
     { label: "Dashboard", path: "/dashboard", icon: <LayoutDashboard className="h-[18px] w-[18px]" /> },
     { label: "Thesis Review", path: "/dashboard/thesis-review", icon: <FileText className="h-[18px] w-[18px]" /> },
+    { label: "Notifications", path: "/dashboard/notifications", icon: <Bell className="h-[18px] w-[18px]" /> },
+    { label: "Profile", path: "/dashboard/profile", icon: <User className="h-[18px] w-[18px]" /> },
   ],
   hod: [
     { label: "Dashboard", path: "/dashboard", icon: <LayoutDashboard className="h-[18px] w-[18px]" /> },
     { label: "Profile", path: "/dashboard/profile", icon: <User className="h-[18px] w-[18px]" /> },
     { label: "Students & Grades", path: "/dashboard/students", icon: <ClipboardList className="h-[18px] w-[18px]" /> },
     { label: "Thesis", path: "/dashboard/thesis", icon: <BookOpen className="h-[18px] w-[18px]" /> },
+    { label: "Notifications", path: "/dashboard/notifications", icon: <Bell className="h-[18px] w-[18px]" /> },
   ],
   faculty: [
     { label: "Dashboard", path: "/dashboard", icon: <LayoutDashboard className="h-[18px] w-[18px]" /> },

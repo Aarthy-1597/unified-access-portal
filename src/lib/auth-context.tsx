@@ -36,11 +36,11 @@ const MOCK_USERS: Record<UserRole, User> = {
 };
 
 export const ROLE_LABELS: Record<UserRole, string> = {
-  super_admin: "Super Admin / Academic Dean",
+  super_admin: "Admin (Academic Dean)",
   student: "Student",
   thesis_supervisor: "Thesis Supervisor",
   hod: "Head of Department",
-  faculty: "Faculty / Facilitator",
+  faculty: "Faculty",
   finance: "Finance Team",
 };
 
