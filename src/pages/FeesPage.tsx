@@ -1,76 +1,100 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Filter, Download, DollarSign, TrendingUp, Users } from "lucide-react";
+import { motion } from "framer-motion";
+import { DollarSign, TrendingUp, Users, ArrowUpRight, Download, ChevronDown } from "lucide-react";
 
-const FEE_RECORDS = [
-  { id: "STU-001", name: "Rahul Kumar", program: "M.Th", department: "Theology", total: "₹1,20,000", paid: "₹1,20,000", status: "Full Paid", scholarship: "Merit - ₹30,000" },
-  { id: "STU-002", name: "Anna Thomas", program: "M.Div", department: "Biblical Studies", total: "₹1,00,000", paid: "₹60,000", status: "Partially", scholarship: "None" },
-  { id: "STU-003", name: "David Samuel", program: "Ph.D", department: "Missiology", total: "₹1,50,000", paid: "₹1,50,000", status: "Full Paid", scholarship: "Research - ₹50,000" },
-  { id: "STU-004", name: "Priya Mathew", program: "M.Th", department: "Theology", total: "₹1,20,000", paid: "₹80,000", status: "Partially", scholarship: "Need-based - ₹20,000" },
+const FEE_STATS = [
+  { label: "Total Collection", value: "₹2.4 Cr", change: "+8%", icon: <DollarSign className="h-5 w-5" />, color: "bg-success/10 text-success" },
+  { label: "Pending Fees", value: "₹18.5 L", icon: <DollarSign className="h-5 w-5" />, color: "bg-warning/10 text-warning" },
+  { label: "Scholarships", value: "₹12.3 L", icon: <TrendingUp className="h-5 w-5" />, color: "bg-info/10 text-info" },
+  { label: "Students (Paid)", value: "1,089", change: "+4%", icon: <Users className="h-5 w-5" />, color: "bg-primary/8 text-primary" },
+];
+
+const FEES = [
+  { id: "STU-001", name: "Rahul Kumar", program: "M.Th", total: "₹1,20,000", paid: "₹1,20,000", status: "Full Paid", date: "Jan 15, 2026" },
+  { id: "STU-002", name: "Anna Thomas", program: "M.Div", total: "₹1,00,000", paid: "₹60,000", status: "Partial", date: "Feb 10, 2026" },
+  { id: "STU-003", name: "David Samuel", program: "Ph.D", total: "₹1,50,000", paid: "₹1,50,000", status: "Full Paid", date: "Jan 05, 2026" },
+  { id: "STU-004", name: "Priya Mathew", program: "M.Th", total: "₹1,20,000", paid: "₹0", status: "Pending", date: "—" },
+  { id: "STU-005", name: "John Philip", program: "M.Div", total: "₹1,00,000", paid: "₹40,000", status: "Partial", date: "Mar 01, 2026" },
 ];
 
 export default function FeesPage() {
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h2 className="text-2xl font-bold">Fee Management</h2>
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm"><Filter className="h-4 w-4 mr-1" /> Program</Button>
-          <Button variant="outline" size="sm"><Filter className="h-4 w-4 mr-1" /> Status</Button>
-          <Button variant="outline" size="sm"><Download className="h-4 w-4 mr-1" /> Export</Button>
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h2 className="page-title">Fee Management</h2>
+          <p className="page-subtitle">Track fee collection, payments & scholarships</p>
         </div>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" className="rounded-xl h-9"><Download className="h-4 w-4 mr-1.5" /> Export</Button>
+          <Button variant="outline" size="sm" className="rounded-xl h-9">Status <ChevronDown className="h-3 w-3 ml-1 opacity-50" /></Button>
+        </div>
+      </motion.div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {FEE_STATS.map((s, i) => (
+          <motion.div key={i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}>
+            <Card className="stat-card">
+              <CardContent className="p-5">
+                <div className="flex items-start justify-between mb-4">
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${s.color}`}>{s.icon}</div>
+                  {s.change && (
+                    <span className="inline-flex items-center gap-0.5 text-[11px] font-semibold text-success bg-success/10 px-2 py-0.5 rounded-full">
+                      <ArrowUpRight className="h-3 w-3" />{s.change}
+                    </span>
+                  )}
+                </div>
+                <p className="text-2xl font-bold font-['Merriweather']">{s.value}</p>
+                <p className="text-xs text-muted-foreground mt-1">{s.label}</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card><CardContent className="p-5">
-          <div className="flex items-center gap-3"><div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center text-green-600"><DollarSign className="h-5 w-5" /></div>
-          <div><p className="text-xl font-bold">₹4,90,000</p><p className="text-xs text-muted-foreground font-['Raleway']">Total Collected</p></div></div>
-        </CardContent></Card>
-        <Card><CardContent className="p-5">
-          <div className="flex items-center gap-3"><div className="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center text-yellow-600"><TrendingUp className="h-5 w-5" /></div>
-          <div><p className="text-xl font-bold">₹1,00,000</p><p className="text-xs text-muted-foreground font-['Raleway']">Pending</p></div></div>
-        </CardContent></Card>
-        <Card><CardContent className="p-5">
-          <div className="flex items-center gap-3"><div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600"><Users className="h-5 w-5" /></div>
-          <div><p className="text-xl font-bold">₹1,00,000</p><p className="text-xs text-muted-foreground font-['Raleway']">Scholarships Given</p></div></div>
-        </CardContent></Card>
-      </div>
-
-      <Card>
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm font-['Raleway']">
-              <thead>
-                <tr className="border-b border-border bg-muted/50">
-                  <th className="text-left p-3 font-semibold text-muted-foreground">ID</th>
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Name</th>
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Program</th>
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Total Fee</th>
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Paid</th>
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Status</th>
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Scholarship</th>
-                </tr>
-              </thead>
-              <tbody>
-                {FEE_RECORDS.map(f => (
-                  <tr key={f.id} className="border-b border-border hover:bg-muted/30">
-                    <td className="p-3 font-mono text-xs">{f.id}</td>
-                    <td className="p-3 font-semibold">{f.name}</td>
-                    <td className="p-3"><Badge variant="secondary">{f.program}</Badge></td>
-                    <td className="p-3">{f.total}</td>
-                    <td className="p-3">{f.paid}</td>
-                    <td className="p-3">
-                      <Badge className={f.status === "Full Paid" ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700"}>{f.status}</Badge>
-                    </td>
-                    <td className="p-3 text-xs">{f.scholarship}</td>
+      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}>
+        <Card className="rounded-2xl border-border/60 overflow-hidden">
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-border bg-muted/40">
+                    <th className="table-header">ID</th>
+                    <th className="table-header">Name</th>
+                    <th className="table-header">Program</th>
+                    <th className="table-header">Total Fee</th>
+                    <th className="table-header">Paid</th>
+                    <th className="table-header">Status</th>
+                    <th className="table-header">Last Payment</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
+                </thead>
+                <tbody>
+                  {FEES.map((f, i) => (
+                    <motion.tr key={f.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 + i * 0.04 }}
+                      className="border-b border-border/50 hover:bg-muted/30 transition-colors">
+                      <td className="table-cell font-mono text-xs text-muted-foreground">{f.id}</td>
+                      <td className="table-cell font-semibold">{f.name}</td>
+                      <td className="table-cell"><Badge variant="secondary" className="text-[10px] rounded-md">{f.program}</Badge></td>
+                      <td className="table-cell">{f.total}</td>
+                      <td className="table-cell font-semibold">{f.paid}</td>
+                      <td className="table-cell">
+                        <Badge className={`text-[10px] rounded-md ${
+                          f.status === "Full Paid" ? "bg-success/10 text-success border-success/20" :
+                          f.status === "Partial" ? "bg-warning/10 text-warning border-warning/20" :
+                          "bg-destructive/10 text-destructive border-destructive/20"
+                        }`} variant="outline">{f.status}</Badge>
+                      </td>
+                      <td className="table-cell text-muted-foreground text-xs">{f.date}</td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
   );
 }
