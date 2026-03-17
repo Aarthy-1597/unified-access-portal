@@ -6,8 +6,7 @@
 
 @layer base {
   :root {
-    /* SAIACS Blue Foundations #1A2549 → hsl(226, 48%, 19%) */
-    --background: 198 50% 96%;
+    --background: 210 30% 97%;
     --foreground: 226 48% 19%;
 
     --card: 0 0% 100%;
@@ -16,32 +15,27 @@
     --popover: 0 0% 100%;
     --popover-foreground: 226 48% 19%;
 
-    /* Blue Foundations as primary */
     --primary: 226 48% 19%;
-    --primary-foreground: 198 50% 96%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Sky Blue as secondary */
     --secondary: 210 75% 76%;
     --secondary-foreground: 226 48% 19%;
 
-    /* Snow */
-    --muted: 210 20% 92%;
-    --muted-foreground: 215 20% 42%;
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 20% 45%;
 
-    /* Royal Gold as accent */
     --accent: 48 95% 66%;
     --accent-foreground: 226 48% 19%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 25% 88%;
-    --input: 210 25% 88%;
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
     --ring: 226 48% 19%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* SAIACS custom tokens */
     --saiacs-blue-foundations: 226 48% 19%;
     --saiacs-blue-traditions: 215 56% 21%;
     --saiacs-snow: 198 50% 96%;
@@ -49,14 +43,22 @@
     --saiacs-royal-gold: 48 95% 66%;
     --saiacs-tangerine: 22 91% 66%;
 
-    --sidebar-background: 226 48% 19%;
-    --sidebar-foreground: 198 50% 96%;
+    --sidebar-background: 226 48% 15%;
+    --sidebar-foreground: 210 30% 95%;
     --sidebar-primary: 48 95% 66%;
     --sidebar-primary-foreground: 226 48% 19%;
-    --sidebar-accent: 226 48% 25%;
-    --sidebar-accent-foreground: 198 50% 96%;
-    --sidebar-border: 226 40% 28%;
+    --sidebar-accent: 226 48% 22%;
+    --sidebar-accent-foreground: 210 30% 95%;
+    --sidebar-border: 226 40% 24%;
     --sidebar-ring: 210 75% 76%;
+
+    /* Status colors */
+    --success: 152 60% 42%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 210 75% 55%;
+    --info-foreground: 0 0% 100%;
   }
 
   .dark {
@@ -105,11 +107,37 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
     font-family: 'Raleway', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Merriweather', serif;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50 shadow-sm;
+  }
+  
+  .stat-card {
+    @apply bg-card border border-border/60 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  .table-header {
+    @apply text-left p-4 font-semibold text-xs uppercase tracking-wider text-muted-foreground;
+  }
+
+  .table-cell {
+    @apply p-4 text-sm;
+  }
+
+  .page-title {
+    @apply text-2xl font-bold text-foreground tracking-tight;
+  }
+
+  .page-subtitle {
+    @apply text-sm text-muted-foreground mt-1;
   }
 }

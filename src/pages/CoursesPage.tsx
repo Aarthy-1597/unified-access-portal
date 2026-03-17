@@ -1,5 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 
 const COURSES = [
   { code: "TH501", name: "Systematic Theology I", credits: 3, grade: "A", semester: "Fall 2025", instructor: "Dr. James Thomas" },
@@ -13,41 +14,50 @@ const COURSES = [
 export default function CoursesPage() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Course Information & Grades</h2>
-      <Card>
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm font-['Raleway']">
-              <thead>
-                <tr className="border-b border-border bg-muted/50">
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Code</th>
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Course Name</th>
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Credits</th>
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Instructor</th>
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Semester</th>
-                  <th className="text-left p-3 font-semibold text-muted-foreground">Grade</th>
-                </tr>
-              </thead>
-              <tbody>
-                {COURSES.map(c => (
-                  <tr key={c.code} className="border-b border-border hover:bg-muted/30 transition-colors">
-                    <td className="p-3 font-mono text-xs">{c.code}</td>
-                    <td className="p-3 font-semibold">{c.name}</td>
-                    <td className="p-3">{c.credits}</td>
-                    <td className="p-3">{c.instructor}</td>
-                    <td className="p-3">{c.semester}</td>
-                    <td className="p-3">
-                      <Badge className={c.grade === "In Progress" ? "bg-blue-100 text-blue-700" : "bg-green-100 text-green-700"}>
-                        {c.grade}
-                      </Badge>
-                    </td>
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+        <h2 className="page-title">Courses & Grades</h2>
+        <p className="page-subtitle">Your enrolled courses and academic performance</p>
+      </motion.div>
+
+      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+        <Card className="rounded-2xl border-border/60 overflow-hidden">
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-border bg-muted/40">
+                    <th className="table-header">Code</th>
+                    <th className="table-header">Course Name</th>
+                    <th className="table-header">Credits</th>
+                    <th className="table-header">Instructor</th>
+                    <th className="table-header">Semester</th>
+                    <th className="table-header">Grade</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
+                </thead>
+                <tbody>
+                  {COURSES.map((c, i) => (
+                    <motion.tr key={c.code} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 + i * 0.04 }}
+                      className="border-b border-border/50 hover:bg-muted/30 transition-colors">
+                      <td className="table-cell font-mono text-xs text-muted-foreground">{c.code}</td>
+                      <td className="table-cell font-semibold">{c.name}</td>
+                      <td className="table-cell">{c.credits}</td>
+                      <td className="table-cell text-muted-foreground">{c.instructor}</td>
+                      <td className="table-cell text-muted-foreground">{c.semester}</td>
+                      <td className="table-cell">
+                        <Badge className={`text-[10px] rounded-md ${
+                          c.grade === "In Progress"
+                            ? "bg-info/10 text-info border-info/20"
+                            : "bg-success/10 text-success border-success/20"
+                        }`} variant="outline">{c.grade}</Badge>
+                      </td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
   );
 }
